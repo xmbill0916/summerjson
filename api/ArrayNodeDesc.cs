@@ -1,0 +1,52 @@
+﻿/*
+ * Copyright(C) 2021, 2031 xmbill0916 
+ *  
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+using com.xmbill.json.core;
+using System.Collections.Generic;
+using System.Data;
+
+namespace com.xmbill.json.api
+{
+    public class ArrayNodeDesc:NodeDesc
+    { 
+        public SetArrayValueHandler ArraySetValueHandler { get;set; }
+
+        public static ArrayNodeDesc handler(NewInstanceHandler instanceHandler,SetArrayValueHandler arrayValueHandler)
+        {
+            ArrayNodeDesc arrayNodeDesc = new ArrayNodeDesc();
+            arrayNodeDesc.ArraySetValueHandler = arrayValueHandler;
+            arrayNodeDesc.NewInstance = instanceHandler;
+            return arrayNodeDesc;
+        }
+
+        public static ArrayNodeDesc DefaultArrayHandler = ArrayNodeDesc.handler(
+            (object parentObj) => { return new List<object>(); },
+            (object obj, JsonType jsonType, int key, object value) => { ((List<object>)obj).Add(value); }
+            );
+
+ 
+        public static ArrayNodeDesc DataTableHandler(NewInstanceHandler dataTableInstance)
+        {
+            ArrayNodeDesc arrayNodeDesc = new ArrayNodeDesc();
+            arrayNodeDesc.ArraySetValueHandler = (object obj, JsonType jsonType, int key, object value) => { ((DataTable)obj).Rows.Add((DataRow)value); };
+            arrayNodeDesc.NewInstance = dataTableInstance;
+            return arrayNodeDesc;
+        }
+
+
+    }
+}

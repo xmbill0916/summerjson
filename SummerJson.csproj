@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{55B2AC1B-16AA-4265-B49A-37BF246880C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SummerJson</RootNamespace>
+    <AssemblyName>SummerJson</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="api\ArrayNodeDesc.cs" />
+    <Compile Include="api\IJsonObjectWriter.cs" />
+    <Compile Include="api\IJsonParseInvoke.cs" />
+    <Compile Include="api\Json.cs" />
+    <Compile Include="api\JsonParameter.cs" />
+    <Compile Include="api\JsonPathDesc.cs" />
+    <Compile Include="api\JsonType.cs" />
+    <Compile Include="api\JsonWriter.cs" />
+    <Compile Include="api\ObjectNodeDesc.cs" />
+    <Compile Include="core\JsonUtils.cs" />
+    <Compile Include="core\NodeDesc.cs" />
+    <Compile Include="core\reader\DefaultInvokeParse.cs" />
+    <Compile Include="core\reader\DescInvokeParse.cs" />
+    <Compile Include="core\reader\JsonParser.cs" />
+    <Compile Include="core\reader\JsonParserArray.cs" />
+    <Compile Include="core\reader\JsonParserBase.cs" />
+    <Compile Include="core\reader\JsonParserObject.cs" />
+    <Compile Include="core\reader\JsonParserSkip.cs" />
+    <Compile Include="core\reader\JsonReaderUtils.cs" />
+    <Compile Include="core\writer\JsonWriterArray.cs" />
+    <Compile Include="core\writer\JsonWriterBase.cs" />
+    <Compile Include="core\writer\JsonWriterDBData.cs" />
+    <Compile Include="core\writer\JsonWriterObject.cs" />
+    <Compile Include="core\writer\JsonWriterUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

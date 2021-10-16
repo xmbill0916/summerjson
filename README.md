@@ -24,9 +24,9 @@ summerjson 直接将json串转为指定的对象，这样带来使用的方便�
   Json.ToObject(JsonParameter jsonParameter, IJsonParseInvoke jsonParseInvoke)
   Json.ToObject(JsonParameter jsonParameter, JsonPathDesc jsonPathDesc)
   基本类型以外的结点才需要结点描述；
-  2.1,json 数组或对象 指定类型
-            object obj; 
-            obj = JsonPathDescExample.RootIsArrayToObject();
+  参照例子
+  2.1,json 数组或对象 指定类型 
+            object obj = JsonPathDescExample.RootIsArrayToObject();
             obj = JsonPathDescExample.RootIsArrayToObjectOfCustomType();
             obj = JsonPathDescExample.RootIsArrayToArrayTypeObject();
             obj = JsonPathDescExample.RootIsArrayToObjectOfCustomType1();
@@ -37,6 +37,5 @@ summerjson 直接将json串转为指定的对象，这样带来使用的方便�
 3,Json串路径描述类JsonPathDesc
   可参照例子来理解应用  
   
-
-            
+想法与实现一定存在不足，欢迎您宝贵意见！          
      

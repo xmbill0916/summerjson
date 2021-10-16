@@ -22,7 +22,7 @@ using System.Data;
 
 namespace com.xmbill.json.api
 {
-    public class ObjectNodeDesc:NodeDesc
+    public class ObjectNodeDesc : NodeDesc
     {
         public SetObjectValueHandler ObjectSetValueHandler { get; set; }
         public static ObjectNodeDesc handler(NewInstanceHandler instanceHandler, SetObjectValueHandler objectValueHandler)
@@ -34,12 +34,12 @@ namespace com.xmbill.json.api
         }
 
         public static ObjectNodeDesc DefaultObjectHandler = ObjectNodeDesc.handler(
-                (object parentObj) => { return new Dictionary<string, object>(); },
+                (object parentObj,string key) => { return new Dictionary<string, object>(); },
                 (object obj, JsonType jsonType, string key, object value) => { ((Dictionary<string, object>)obj).Add(key, value); }
                 );
 
         public static ObjectNodeDesc DataSetHandler = ObjectNodeDesc.handler(
-            (object parentObj) => { return new DataSet(); },
+            (object parentObj,string key) => { return new DataSet(); },
             (object obj, JsonType jsonType, string k, object v) =>
             {
                 ((DataTable)v).TableName = k;
@@ -50,8 +50,18 @@ namespace com.xmbill.json.api
         {
             ObjectNodeDesc objectNodeDesc = new ObjectNodeDesc();
             objectNodeDesc.ObjectSetValueHandler = dataRowSetValueHandler;
-            objectNodeDesc.NewInstance = (object parentObj)=> { return ((DataTable)parentObj).NewRow(); };
+            objectNodeDesc.NewInstance = (object parentObj,string key) => { return ((DataTable)parentObj).NewRow(); };
             return objectNodeDesc;
         }
+        public static SetObjectValueHandler DataRowSetValueDefaultHandler = 
+            (object obj, JsonType jsonType, string key, object value) =>{
+                DataRow dataRow = (DataRow)obj;
+                DataColumn dc = dataRow.Table.Columns[key];
+                if (dc != null)
+                    dataRow[key] = value;
+                };
+
+
+       
     }
 }

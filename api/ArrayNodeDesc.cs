@@ -37,7 +37,7 @@ namespace com.xmbill.json.api
         }
 
         public static ArrayNodeDesc DefaultArrayHandler = ArrayNodeDesc.handler(
-            (object parentObj) => { return new List<object>(); },
+            (object parentObj,string key) => { return new List<object>(); },
             (object obj, JsonType jsonType, int key, object value) => { ((List<object>)obj).Add(value); }
             );
 

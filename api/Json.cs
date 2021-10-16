@@ -24,8 +24,22 @@ using System.Text;
 
 namespace com.xmbill.json.api
 {
-    public delegate object NewInstanceHandler(object parentObj);
+    public delegate object NewInstanceHandler(object parentObj,string key);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="jsonType"></param>
+    /// <param name="key"></param>
+    /// <param name="value"> jsonType jsNumber 时 value 还是数字字符串 须使用JsonReaderUtils.ConvertValue 指定转化的数值类型</param>
     public delegate void SetObjectValueHandler(object obj, JsonType jsonType, string key, object value);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="jsonType"></param>
+    /// <param name="key"></param>
+    /// <param name="value"> jsonType jsNumber 时 value 还是数字字符串 须使用JsonReaderUtils.ConvertValue 指定转化的数值类型</param>
     public delegate void SetArrayValueHandler(object obj, JsonType jsonType, int key, object value);
     public class Json
     {

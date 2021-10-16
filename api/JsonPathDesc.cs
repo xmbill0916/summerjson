@@ -112,7 +112,12 @@ namespace com.xmbill.json.api
          */
         public JsonPathDesc AddObjectChildOfDefaultDesc(NodeDesc defaultNodeDesc)
         {
-            return AddObjectChild("*", defaultNodeDesc);
+            if (defaultNodeDesc is ObjectNodeDesc)
+                return AddObjectChild("*", defaultNodeDesc);
+            else if (defaultNodeDesc is ArrayNodeDesc)
+                return AddObjectChild("-", defaultNodeDesc);
+            else
+                return null;
         }
         /**
          * 对象结点对应的数组描述
@@ -145,7 +150,26 @@ namespace com.xmbill.json.api
          */
         public JsonPathDesc AddArrayElement(NodeDesc nodeDesc)
         {
-            return AddChild("-", nodeDesc);
+            if (nodeDesc is ArrayNodeDesc)
+                return AddChild("-", nodeDesc);
+            else if (nodeDesc is ObjectNodeDesc)
+                return AddChild("*", nodeDesc);
+            else
+                return null;
+        }
+        public JsonPathDesc AddArrayElement(int index,NodeDesc nodeDesc)
+        {
+            return AddChild(index.ToString(), nodeDesc);
+        }
+        public JsonPathDesc AddObjectChildDataTable(string key, DataTable dataTable)
+        {
+            return AddObjectChildDataTable(key, dataTable, ObjectNodeDesc.DataRowSetValueDefaultHandler);
+        }
+        public JsonPathDesc AddObjectChildDataTable(string key, DataTable dataTable, SetObjectValueHandler setDataRowValueHandler)
+        {
+            JsonPathDesc dataTableDesc = AddObjectChildOfArray(key, ArrayNodeDesc.DataTableHandler((object parentObj,string k)=> { return dataTable; }));
+            dataTableDesc.AddArrayElement(ObjectNodeDesc.DataRowHandler(setDataRowValueHandler));
+            return dataTableDesc;
         }
 
 
@@ -161,7 +185,14 @@ namespace com.xmbill.json.api
         { 
             return AddChild(key, ObjectNodeDesc.DataSetHandler);
         }
-
+        public JsonPathDesc AddObjectChildOfDataSet(string key,DataSet dataSet)
+        {
+            return ObjectDescUtils.DataSetInstanceHandler(this, key, dataSet);
+        }
+        public JsonPathDesc AddObjectChildOfDataSet(string key, DataSet dataSet, SetObjectValueHandler dataRowSetValueHandler)
+        {
+            return ObjectDescUtils.DataSetInstanceHandler(this, key, dataSet, dataRowSetValueHandler);
+        }
         /**
          * 键得到其值对应的描述
          *
@@ -227,9 +258,9 @@ namespace com.xmbill.json.api
          * 描述对应的实例
          * @return
          */
-        public object NewInstance(object parentObj)
+        public object NewInstance(object parentObj,string key)
         {
-            return nodeDesc.NewInstance(parentObj);
+            return nodeDesc.NewInstance(parentObj,key);
         }
 
         /**

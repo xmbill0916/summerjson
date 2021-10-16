@@ -59,12 +59,12 @@ namespace com.xmbill.json.core.reader
                     {
                         case 1:
                             {
-                                value = JsonParserObject.parseObject(array,"-", descPath, jsonParameter, jsonValueInvoke);
+                                value = JsonParserObject.parseObject(array, index.ToString(), descPath, jsonParameter, jsonValueInvoke);
                                 break;
                             }
                         case 2:
                             {
-                                value = parseArray(array,"-", descPath, jsonParameter, jsonValueInvoke);
+                                value = parseArray(array,index.ToString(), descPath, jsonParameter, jsonValueInvoke);
                                 break;
                             }
                         case 3:

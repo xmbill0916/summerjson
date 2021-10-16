@@ -65,15 +65,23 @@ namespace com.xmbill.json.core.reader
                 {
                     JsonPathDesc currentDescTmp = currentDesc.GetChild(parentKey);
                     if ((!"*".Equals(parentKey)) && (currentDescTmp == null))
+                    {
                         currentDescTmp = currentDesc.GetChild("*");
+                        if (currentDescTmp != null)
+                        {
+                            if (!(currentDescTmp.GetNodeDesc() is ObjectNodeDesc))
+                                currentDescTmp = null;
+                        }
+                    } 
                     currentDesc = currentDescTmp;
+                    
                 }
             }
             stackNodeDesc.Add(currentDesc);
             if (currentDesc == null)
                 return new Dictionary<string, object>();
             else
-                return currentDesc.NewInstance(parentObj);
+                return currentDesc.NewInstance(parentObj,parentKey);
         }
 
         public void setObjectKeyValue(object obj, JsonType jsonType, string key, object value)
@@ -116,14 +124,22 @@ namespace com.xmbill.json.core.reader
             {
                 if (currentDesc != null)
                 {
-                    currentDesc = currentDesc.GetChild(parentKey);
+                    JsonPathDesc currentDescTmp = currentDesc.GetChild(parentKey);
+                    if ((!"-".Equals(parentKey)) && (currentDescTmp == null))
+                    {
+
+                        currentDescTmp = currentDesc.GetChild("-");
+                        if ((currentDescTmp != null) && (!(currentDescTmp.GetNodeDesc() is ArrayNodeDesc)))
+                        currentDescTmp = null;
+                    }
+                    currentDesc = currentDescTmp; 
                 }
             }
             stackNodeDesc.Add(currentDesc);
             if (currentDesc == null)
                 return new List<object>();
             else
-                return currentDesc.NewInstance(parentObj);
+                return currentDesc.NewInstance(parentObj,parentKey);
         }
 
         public void setArrayValue(object list, JsonType jsonType, int index, object value)

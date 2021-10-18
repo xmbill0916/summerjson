@@ -59,7 +59,12 @@ namespace com.xmbill.json.api
             }
             return this;
         }
-
+        public JsonWriter addKey(string key)
+        {
+            JsonWriterBase.writeFast(jsonWriter, key);
+            JsonWriterBase.objColon(jsonWriter);
+            return this;
+        }
         public JsonWriter addKeyValue(string key, object value)
         {
             JsonWriterBase.writeFast(jsonWriter, key);
@@ -168,6 +173,10 @@ namespace com.xmbill.json.api
             JsonWriterBase.backspace(jsonWriter);
         }
 
+        public StringBuilder getJsonWriter()
+        {
+            return jsonWriter;
+        }
 
     }
 }

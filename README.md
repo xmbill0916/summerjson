@@ -28,6 +28,7 @@ summerjson 将解决如上问题，在转化过程可对json串结点指定的�
   基本类型以外的结点才需要结点描述；
   
   参照例子
+  
   2.1,json 数组或对象 指定类型 
             object obj = JsonPathDescExample.RootIsArrayToObject();
             obj = JsonPathDescExample.RootIsArrayToObjectOfCustomType();
@@ -42,5 +43,5 @@ summerjson 将解决如上问题，在转化过程可对json串结点指定的�
 
   可参照例子来理解应用  
   
-想法与实现一定存在不足，欢迎您宝贵意见！          
+想法与实现一定存在不足，欢迎您提供宝贵意见！          
 Email:397216371@QQ.com

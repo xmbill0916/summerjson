@@ -129,13 +129,22 @@ namespace com.xmbill.json.core
                 {
                     if (!JsonWriterBase.writeValue(jsonWriter, value))
                     {
-                        if (value is IJsonObjectWriter)
-                            ((IJsonObjectWriter)value).ToJson(JsonWriter.newInstance(jsonWriter), value, value.GetType());
-                        else if (jsonObjectWriter != null)
+                        bool isWriter = false;
+                        if (jsonObjectWriter != null)
+                        {
+                            int iLb=jsonWriter.Length;
                             jsonObjectWriter.ToJson(JsonWriter.newInstance(jsonWriter), value, value.GetType());
-                        else
-                            throw new Exception(string.Format("{0} object Json serialization is not implemented," +
-                                    "it can be serialized by implementing the IJsonObjectWriter interface ", value.GetType().ToString()));
+                            isWriter = jsonWriter.Length - iLb > 0;
+                        }
+                        if (!isWriter)
+                        {
+                            if (value is IJsonSerialization)
+                                ((IJsonSerialization)value).ToJson(JsonWriter.newInstance(jsonWriter));
+
+                            else
+                                throw new Exception(string.Format("{0} object Json serialization is not implemented," +
+                                        "it can be serialized by implementing the IJsonObjectWriter interface ", value.GetType().ToString()));
+                        }
                     }
                 }
             }

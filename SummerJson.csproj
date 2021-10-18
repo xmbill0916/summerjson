@@ -7,7 +7,7 @@
     <ProjectGuid>{55B2AC1B-16AA-4265-B49A-37BF246880C7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SummerJson</RootNamespace>
+    <RootNamespace>com.xmbill.json</RootNamespace>
     <AssemblyName>SummerJson</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -34,7 +34,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>summerjson.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -45,11 +51,13 @@
     <Compile Include="api\ArrayNodeDesc.cs" />
     <Compile Include="api\IJsonObjectWriter.cs" />
     <Compile Include="api\IJsonParseInvoke.cs" />
+    <Compile Include="api\IJsonSerialization.cs" />
     <Compile Include="api\Json.cs" />
     <Compile Include="api\JsonParameter.cs" />
     <Compile Include="api\JsonPathDesc.cs" />
     <Compile Include="api\JsonType.cs" />
     <Compile Include="api\JsonWriter.cs" />
+    <Compile Include="api\ObjectDescUtils.cs" />
     <Compile Include="api\ObjectNodeDesc.cs" />
     <Compile Include="core\JsonUtils.cs" />
     <Compile Include="core\NodeDesc.cs" />
@@ -67,6 +75,9 @@
     <Compile Include="core\writer\JsonWriterObject.cs" />
     <Compile Include="core\writer\JsonWriterUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="summerjson.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

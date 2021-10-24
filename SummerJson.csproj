@@ -52,6 +52,8 @@
     <Compile Include="api\IJsonObjectWriter.cs" />
     <Compile Include="api\IJsonParseInvoke.cs" />
     <Compile Include="api\IJsonSerialization.cs" />
+    <Compile Include="api\IJsonUnSerialization.cs" />
+    <Compile Include="api\IParent.cs" />
     <Compile Include="api\Json.cs" />
     <Compile Include="api\JsonParameter.cs" />
     <Compile Include="api\JsonPathDesc.cs" />
@@ -59,6 +61,8 @@
     <Compile Include="api\JsonWriter.cs" />
     <Compile Include="api\ObjectDescUtils.cs" />
     <Compile Include="api\ObjectNodeDesc.cs" />
+    <Compile Include="api\RelationDictionary.cs" />
+    <Compile Include="api\RelationList.cs" />
     <Compile Include="core\JsonUtils.cs" />
     <Compile Include="core\NodeDesc.cs" />
     <Compile Include="core\reader\DefaultInvokeParse.cs" />
